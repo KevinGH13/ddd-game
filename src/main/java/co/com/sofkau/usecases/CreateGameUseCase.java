@@ -19,9 +19,8 @@ public class CreateGameUseCase extends UseCase<RequestCommand<CreateGame>, Respo
             throw new BusinessException(gameId.value(), "Game allow 2 or more players");
         }
 
-        var game = new Game(new GameId());
+        var game = new Game(new GameId(), command.getPlayers());
         emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
-
 
     }
 }

@@ -6,6 +6,8 @@ import co.com.sofkau.domain.game.events.GameCreated;
 public class GameChange extends EventChange {
     public GameChange(Game game) {
         apply((GameCreated event) -> game.players = event.getPlayers());
+
+        //TODO apply others events here
     }
 
 }

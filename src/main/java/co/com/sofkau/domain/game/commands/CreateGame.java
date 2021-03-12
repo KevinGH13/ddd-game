@@ -6,7 +6,7 @@ import co.com.sofkau.domain.game.Player;
 import java.util.Set;
 
 public class CreateGame implements Command {
-    private Set<Player> players;
+    private final Set<Player> players;
 
     public CreateGame(Set<Player> players) {
         this.players = players;
