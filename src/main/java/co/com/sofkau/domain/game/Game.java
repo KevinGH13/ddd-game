@@ -3,6 +3,7 @@ package co.com.sofkau.domain.game;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofkau.domain.game.events.GameCreated;
+import co.com.sofkau.domain.game.events.GameStarted;
 import co.com.sofkau.domain.game.events.RoundCreated;
 import co.com.sofkau.domain.game.values.GameId;
 import co.com.sofkau.domain.game.values.Person;
@@ -17,6 +18,7 @@ public class Game extends AggregateEvent<GameId> {
 
     protected Map<Person, Player> players;
     protected RoundId roundId;
+    protected Boolean gameStarted;
 
     public Game(GameId entityId, Set<Player> players) {
         super(entityId);
@@ -30,6 +32,7 @@ public class Game extends AggregateEvent<GameId> {
         subscribe(new GameChange(this));
     }
 
+
     public static Game from(GameId gameId, List<DomainEvent> events) {
         var game = new Game(gameId);
         events.forEach(game::applyEvent);
@@ -37,6 +40,14 @@ public class Game extends AggregateEvent<GameId> {
     }
 
     //TODO apply aggregate behaviors here
+
+    public void createGame() {
+        appendChange(new GameCreated(players()));
+    }
+
+    public void startGame() {
+        appendChange(new GameStarted());
+    }
 
     public void createRound() {
         var newRound = new RoundId();
@@ -49,6 +60,10 @@ public class Game extends AggregateEvent<GameId> {
 
     public RoundId roundId() {
         return roundId;
+    }
+
+    public Boolean gameStarted() {
+        return gameStarted;
     }
 
 }
