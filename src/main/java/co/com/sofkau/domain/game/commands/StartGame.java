@@ -1,4 +1,7 @@
 package co.com.sofkau.domain.game.commands;
 
-public class StartGame {
+import co.com.sofka.domain.generic.Command;
+
+public class StartGame implements Command {
+
 }

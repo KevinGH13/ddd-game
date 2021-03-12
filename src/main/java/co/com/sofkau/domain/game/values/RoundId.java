@@ -8,6 +8,8 @@ public class RoundId extends Identity {
         super(uid);
     }
 
+    public RoundId() {}
+
     public static RoundId of(String uid) {
         return new RoundId(uid);
     }

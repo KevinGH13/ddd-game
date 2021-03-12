@@ -3,6 +3,7 @@ package co.com.sofkau.domain.game;
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofkau.domain.game.events.GameCreated;
+import co.com.sofkau.domain.game.events.RoundCreated;
 import co.com.sofkau.domain.game.values.GameId;
 import co.com.sofkau.domain.game.values.Person;
 import co.com.sofkau.domain.game.values.RoundId;
@@ -37,6 +38,10 @@ public class Game extends AggregateEvent<GameId> {
 
     //TODO apply aggregate behaviors here
 
+    public void createRound() {
+        var newRound = new RoundId();
+        appendChange(new RoundCreated(newRound, players())).apply();
+    }
 
     public Map<Person, Player> players(){
         return players;
