@@ -24,6 +24,12 @@ public class Player extends Entity<Person> {
         this.forecast = forecast;
     }
 
+    public Player(Person person, String name) {
+        super(person);
+        this.name = name;
+        this.cash = new Cash((double) 0);
+    }
+
     public String name() {
         return name;
     }
