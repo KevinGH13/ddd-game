@@ -1,4 +1,15 @@
 package co.com.sofkau.domain.round.values;
 
-public class StageId {
+import co.com.sofka.domain.generic.Identity;
+
+public class StageId extends Identity {
+    private StageId(String uid){
+        super(uid);
+    }
+
+    public StageId(){}
+
+    public StageId of(String uid){
+        return new StageId(uid);
+    }
 }

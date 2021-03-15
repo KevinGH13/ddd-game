@@ -67,5 +67,7 @@ public class Player extends Entity<Person> {
         makeForecast(actualForecast);
     }
 
+    //TODO implement increase and decrease Cash
+
 
 }

@@ -1,14 +1,13 @@
-package co.com.sofkau.domain.game.values;
+package co.com.sofkau.domain.round.values;
 
 import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class Cash implements ValueObject<Float> {
-
+public class Pot implements ValueObject<Float> {
     private final Float value;
 
-    public Cash(Float value) {
+    public Pot(Float value) {
         this.value = Objects.requireNonNull(value);
     }
 
