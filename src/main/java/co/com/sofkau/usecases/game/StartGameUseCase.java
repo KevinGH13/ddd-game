@@ -1,4 +1,4 @@
-package co.com.sofkau.usecases;
+package co.com.sofkau.usecases.game;
 
 import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCase;
@@ -15,7 +15,7 @@ public class StartGameUseCase extends UseCase<RequestCommand<StartGame>, Respons
         var game = Game.from(command.getGameId(), retrieveEvents());
 
         try {
-            game.startGame();
+            game.startGame(command.getPlayers());
             emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
         } catch (RuntimeException e) {
             emit().onError(new BusinessException(game.identity().value(), e.getMessage()));

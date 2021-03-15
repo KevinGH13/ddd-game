@@ -1,4 +1,6 @@
 package co.com.sofkau.domain.game.commands;
 
-public class EndGame {
+import co.com.sofka.domain.generic.Command;
+
+public class EndGame implements Command {
 }

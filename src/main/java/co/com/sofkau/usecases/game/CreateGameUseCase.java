@@ -1,4 +1,4 @@
-package co.com.sofkau.usecases;
+package co.com.sofkau.usecases.game;
 
 import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCase;

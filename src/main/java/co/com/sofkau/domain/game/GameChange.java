@@ -24,9 +24,6 @@ public class GameChange extends EventChange {
             game.gameStarted = Boolean.TRUE;
         });
 
-        //TODO revise command player
-        //apply((PlayerCreated event) -> game.players = (Map<Person, Player>) event.player());
-
         //TODO apply others events here
     }
 

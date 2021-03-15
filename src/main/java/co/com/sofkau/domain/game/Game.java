@@ -9,10 +9,8 @@ import co.com.sofkau.domain.game.events.RoundCreated;
 import co.com.sofkau.domain.game.factory.PlayerFactory;
 import co.com.sofkau.domain.game.values.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Game extends AggregateEvent<GameId> {
 
@@ -42,8 +40,8 @@ public class Game extends AggregateEvent<GameId> {
 
 
     //TODO review this method
-    public void startGame() {
-        appendChange(new GameStarted());
+    public void startGame(Map<Person, Player> players) {
+        appendChange(new GameStarted(players));
     }
 
     public void createRound() {
