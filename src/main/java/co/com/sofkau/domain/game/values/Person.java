@@ -7,6 +7,9 @@ public class Person extends Identity {
         super(dni);
     }
 
+    public Person() {
+    }
+
     public static Person of(String dni) {
         return new Person(dni);
     }

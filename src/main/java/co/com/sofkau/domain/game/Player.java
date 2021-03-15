@@ -1,22 +1,19 @@
 package co.com.sofkau.domain.game;
 
 import co.com.sofka.domain.generic.Entity;
-import co.com.sofkau.domain.game.values.Bet;
-import co.com.sofkau.domain.game.values.Cash;
-import co.com.sofkau.domain.game.values.Forecast;
-import co.com.sofkau.domain.game.values.Person;
+import co.com.sofkau.domain.game.values.*;
 
 import java.util.Objects;
 
 public class Player extends Entity<Person> {
 
-    private final String name;
+    private Name name;
     private Cash cash;
     private Bet bet;
     private Forecast forecast;
 
 
-    public Player(Person person, String name, Cash cash, Bet bet, Forecast forecast) {
+    public Player(Person person, Name name, Cash cash, Bet bet, Forecast forecast) {
         super(person);
         this.name = name;
         this.cash = cash;
@@ -24,13 +21,13 @@ public class Player extends Entity<Person> {
         this.forecast = forecast;
     }
 
-    public Player(Person person, String name) {
+    public Player(Person person, Name name, Cash cash) {
         super(person);
         this.name = name;
-        this.cash = new Cash((double) 0);
+        this.cash = cash;
     }
 
-    public String name() {
+    public Name name() {
         return name;
     }
 

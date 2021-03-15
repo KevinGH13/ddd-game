@@ -4,10 +4,10 @@ import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofkau.domain.game.events.GameCreated;
 import co.com.sofkau.domain.game.events.GameStarted;
+import co.com.sofkau.domain.game.events.PlayerCreated;
 import co.com.sofkau.domain.game.events.RoundCreated;
-import co.com.sofkau.domain.game.values.GameId;
-import co.com.sofkau.domain.game.values.Person;
-import co.com.sofkau.domain.game.values.RoundId;
+import co.com.sofkau.domain.game.factory.PlayerFactory;
+import co.com.sofkau.domain.game.values.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +20,10 @@ public class Game extends AggregateEvent<GameId> {
     protected RoundId roundId;
     protected Boolean gameStarted;
 
-    public Game(GameId entityId, Set<Player> players) {
+    public Game(GameId entityId, PlayerFactory playerFactory) {
         super(entityId);
-        Map<Person, Player> newPlayers = new HashMap<>();
-        players.forEach(player -> newPlayers.put(player.identity(), player));
-        appendChange(new GameCreated(newPlayers)).apply();
+        appendChange(new GameCreated(entityId)).apply();
+        playerFactory.players().forEach(player -> createPlayer(player.identity(), player.name(), player.cash()));
     }
 
     public Game(GameId entityId) {
@@ -41,10 +40,8 @@ public class Game extends AggregateEvent<GameId> {
 
     //TODO apply aggregate behaviors here
 
-    public void createGame() {
-        appendChange(new GameCreated(players()));
-    }
 
+    //TODO review this method
     public void startGame() {
         appendChange(new GameStarted());
     }
@@ -52,6 +49,10 @@ public class Game extends AggregateEvent<GameId> {
     public void createRound() {
         var newRound = new RoundId();
         appendChange(new RoundCreated(newRound, players())).apply();
+    }
+
+    public void createPlayer(Person personId, Name name, Cash cash) {
+        appendChange(new PlayerCreated(personId, name, cash));
     }
 
     public Map<Person, Player> players(){
