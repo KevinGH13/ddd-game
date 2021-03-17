@@ -4,24 +4,26 @@ import co.com.sofka.domain.generic.Entity;
 import co.com.sofkau.domain.round.values.DiceFace;
 import co.com.sofkau.domain.round.values.DiceId;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dice extends Entity<DiceId> {
 
-    private Map<DiceFace, Boolean> values;
+    private List<DiceFace> values;
 
     public Dice(DiceId entityId) {
         super(entityId);
+        this.values = new ArrayList<>();
     }
 
     public void rollDice() {
         for (int i = 0; i < 7; i++){
             var diceFace = (int) ((Math.random()*6) + 1);
-            values.put(new DiceFace(diceFace), Boolean.FALSE);
+            values.add(new DiceFace(diceFace));
         }
     }
 
-    public Map<DiceFace, Boolean> values() {
+    public List<DiceFace> values() {
         return values;
     }
 

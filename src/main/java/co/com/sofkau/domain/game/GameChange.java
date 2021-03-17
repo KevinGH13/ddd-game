@@ -15,8 +15,6 @@ public class GameChange extends EventChange {
             game.players = new HashMap<>();
         });
 
-        apply((RoundCreated event) -> game.roundId = event.getRoundId());
-
         apply((GameStarted event) -> {
             if (Boolean.TRUE.equals(game.gameStarted)){
                 throw new IllegalArgumentException("Game is already created");
@@ -24,7 +22,8 @@ public class GameChange extends EventChange {
             game.gameStarted = Boolean.TRUE;
         });
 
-        //TODO apply others events here
+        apply((RoundCreated event) -> game.roundId = event.getRoundId());
+
     }
 
 }
