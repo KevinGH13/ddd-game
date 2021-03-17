@@ -16,6 +16,7 @@ public class StartGameUseCase extends UseCase<RequestCommand<StartGame>, Respons
 
         try {
             game.startGame(command.getPlayers());
+            game.createRound();
             emit().onResponse(new ResponseEvents(game.getUncommittedChanges()));
         } catch (RuntimeException e) {
             emit().onError(new BusinessException(game.identity().value(), e.getMessage()));

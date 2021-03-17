@@ -46,7 +46,7 @@ public class Game extends AggregateEvent<GameId> {
 
     public void createRound() {
         var newRound = new RoundId();
-        appendChange(new RoundCreated(newRound, players())).apply();
+        appendChange(new RoundCreated(this.entityId, newRound, players().keySet())).apply();
     }
 
     public void createPlayer(Person personId, Name name, Cash cash) {
