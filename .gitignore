@@ -1,5 +1,3 @@
 .idea/
 ddd-game.iml
-/target/
-target/
-*.class
+*/target/**
