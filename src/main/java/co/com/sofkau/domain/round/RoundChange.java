@@ -20,15 +20,13 @@ public class RoundChange extends EventChange {
             round.stages = new HashSet<>();
             round.dices = new HashMap<>();
 
-            for (var i = 1; i <= 6; i++) {
+            for (var i = 1; i < 6; i++) {
                 round.dices.put(DiceId.of(i), new Dice(DiceId.of(i)));
             }
 
         });
 
-        apply((RoundStarted event) -> {
-            round.stages = new HashSet<>();
-        });
+        apply((RoundStarted event) -> round.stages = new HashSet<>());
 
         apply((RolledDice event) -> round.dices.values().forEach(Dice::rollDice));
     }

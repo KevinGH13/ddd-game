@@ -43,10 +43,10 @@ class StartRoundUseCaseTest {
         useCase.addRepository(repository);
 
         var events = executor(roundId, command, useCase);
-        var RoundStarted = (RoundStarted) events.get(0);
+        var roundStarted = (RoundStarted) events.get(0);
 
-        Assertions.assertEquals(roundId, RoundStarted.getRoundId());
-        Assertions.assertEquals(gameId, RoundStarted.getGameId());
+        Assertions.assertEquals(roundId, roundStarted.getRoundId());
+        Assertions.assertEquals(gameId, roundStarted.getGameId());
 
 
     }

@@ -17,7 +17,7 @@ public class Dice extends Entity<DiceId> {
     }
 
     public void rollDice() {
-        for (int i = 0; i < 7; i++){
+        for (int i = 0; i < 6; i++){
             var diceFace = (int) ((Math.random()*6) + 1);
             values.add(new DiceFace(diceFace));
         }
