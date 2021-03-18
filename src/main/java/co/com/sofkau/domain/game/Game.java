@@ -36,10 +36,6 @@ public class Game extends AggregateEvent<GameId> {
         return game;
     }
 
-    //TODO apply aggregate behaviors here
-
-
-    //TODO review this method
     public void startGame(Map<Person, Player> players) {
         appendChange(new GameStarted(players));
     }
