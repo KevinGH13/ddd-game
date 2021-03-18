@@ -22,7 +22,8 @@ public class GameChange extends EventChange {
             game.gameStarted = Boolean.TRUE;
         });
 
-        apply((RoundCreated event) -> game.roundId = event.getRoundId());
+        apply((RoundCreated event) ->  game.roundId = event.getRoundId());
+        
 
     }
 

@@ -4,13 +4,13 @@ import co.com.sofka.domain.generic.Identity;
 
 public class DiceId extends Identity {
 
-    private DiceId(String uid){
-        super(uid);
+    private DiceId(Integer uid){
+        super(uid.toString());
     }
 
     public DiceId(){}
 
-    public static DiceId of(String uid) {
+    public static DiceId of(Integer uid) {
         return new DiceId(uid);
     }
 

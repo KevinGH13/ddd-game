@@ -12,10 +12,7 @@ import co.com.sofkau.domain.round.values.DiceId;
 import co.com.sofkau.domain.round.values.Pot;
 import co.com.sofkau.domain.round.values.StageId;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Round extends AggregateEvent<RoundId> {
@@ -33,9 +30,6 @@ public class Round extends AggregateEvent<RoundId> {
 
     public Round(RoundId entityId, GameId gameId, Set<Person> players) {
         super(entityId);
-        this.gameId = Objects.requireNonNull(gameId);
-        this.players = Objects.requireNonNull(players);
-        this.pot = new Pot((float) 0);
         appendChange(new RoundCreated(gameId, entityId, players)).apply();
     }
 
