@@ -6,12 +6,12 @@ import co.com.sofkau.domain.game.values.Forecast;
 
 import java.util.Objects;
 
-public class BettingRound implements ValueObject<BettingRound.Values> {
+public class CompoundBet implements ValueObject<CompoundBet.Values> {
 
     private final Bet bet;
     private final Forecast forecast;
 
-    public BettingRound(Bet bet, Forecast forecast) {
+    public CompoundBet(Bet bet, Forecast forecast) {
         this.bet = Objects.requireNonNull(bet);
         this.forecast = Objects.requireNonNull(forecast);
     }
@@ -19,7 +19,7 @@ public class BettingRound implements ValueObject<BettingRound.Values> {
     @Override
     public Values value() {
 
-        return new BettingRound.Values() {
+        return new CompoundBet.Values() {
             @Override
             public Bet bet() {
                 return bet;

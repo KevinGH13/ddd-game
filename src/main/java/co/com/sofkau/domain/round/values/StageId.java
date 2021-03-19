@@ -3,13 +3,14 @@ package co.com.sofkau.domain.round.values;
 import co.com.sofka.domain.generic.Identity;
 
 public class StageId extends Identity {
-    private StageId(String uid){
-        super(uid);
+    private StageId(Integer uid){
+        super(uid.toString());
     }
 
     public StageId(){}
 
-    public StageId of(String uid){
+    public static StageId of(Integer uid) {
         return new StageId(uid);
     }
+
 }

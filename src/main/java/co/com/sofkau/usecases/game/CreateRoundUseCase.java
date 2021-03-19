@@ -4,7 +4,6 @@ import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofka.business.support.TriggeredEvent;
-import co.com.sofkau.domain.game.Game;
 import co.com.sofkau.domain.game.events.GameStarted;
 import co.com.sofkau.domain.game.values.GameId;
 import co.com.sofkau.domain.game.values.RoundId;
@@ -26,7 +25,6 @@ public class CreateRoundUseCase extends UseCase<TriggeredEvent<GameStarted>, Res
         var round = new Round(roundId, gameId, event.getPlayers().keySet());
 
         emit().onResponse(new ResponseEvents(round.getUncommittedChanges()));
-
 
     }
 }

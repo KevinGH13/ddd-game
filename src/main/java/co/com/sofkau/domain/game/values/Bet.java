@@ -4,16 +4,16 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class Bet implements ValueObject<Double> {
+public class Bet implements ValueObject<Float> {
 
-    private final Double value;
+    private final Float value;
 
-    public Bet(Double value) {
+    public Bet(Float value) {
         this.value = Objects.requireNonNull(value);
     }
 
     @Override
-    public Double value() {
+    public Float value() {
         return value;
     }
 

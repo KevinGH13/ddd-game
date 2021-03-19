@@ -24,7 +24,6 @@ public class GameChange extends EventChange {
 
         apply((RoundCreated event) ->  game.roundId = event.getRoundId());
 
-
     }
 
 }

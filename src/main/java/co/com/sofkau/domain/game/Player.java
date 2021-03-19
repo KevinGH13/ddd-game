@@ -43,6 +43,11 @@ public class Player extends Entity<Person> {
         return forecast;
     }
 
+    public void decreaseCash(Cash cash) {
+        Cash newCash = new Cash(cash.value());
+        this.cash = newCash;
+    }
+
     public void makeBet(Bet bet){
         this.bet = Objects.requireNonNull(bet);
     }
@@ -51,7 +56,7 @@ public class Player extends Entity<Person> {
         this.bet = Objects.requireNonNull(equalBet);
     }
 
-    public void increaseBet (Double newBet) {
+    public void increaseBet (Float newBet) {
         if(newBet < bet.value()) {
             throw new IllegalArgumentException("New bet cannot be lower than actual bet");
         }

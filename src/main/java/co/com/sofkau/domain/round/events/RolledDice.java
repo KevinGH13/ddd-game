@@ -10,7 +10,6 @@ import java.util.Map;
 
 public class RolledDice extends DomainEvent {
 
-
     private final GameId gameId;
     private final List<Map<DiceId, List<DiceFace>>> diceValues;
 

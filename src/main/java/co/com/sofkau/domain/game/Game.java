@@ -2,10 +2,7 @@ package co.com.sofkau.domain.game;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import co.com.sofkau.domain.game.events.GameCreated;
-import co.com.sofkau.domain.game.events.GameStarted;
-import co.com.sofkau.domain.game.events.PlayerCreated;
-import co.com.sofkau.domain.game.events.RoundCreated;
+import co.com.sofkau.domain.game.events.*;
 import co.com.sofkau.domain.game.factory.PlayerFactory;
 import co.com.sofkau.domain.game.values.*;
 
@@ -47,6 +44,10 @@ public class Game extends AggregateEvent<GameId> {
 
     public void createPlayer(Person personId, Name name, Cash cash) {
         appendChange(new PlayerCreated(personId, name, cash));
+    }
+
+    public void decreaseCashPlayer(Person player, Cash cashDecrease) {
+        appendChange(new CashPlayerDecreased(player, cashDecrease));
     }
 
     public Map<Person, Player> players(){

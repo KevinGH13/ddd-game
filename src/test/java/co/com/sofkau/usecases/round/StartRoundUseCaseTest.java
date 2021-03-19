@@ -47,8 +47,6 @@ class StartRoundUseCaseTest {
 
         Assertions.assertEquals(roundId, roundStarted.getRoundId());
         Assertions.assertEquals(gameId, roundStarted.getGameId());
-
-
     }
 
     private List<DomainEvent> executor (RoundId roundId, StartRound command, StartRoundUseCase useCase){

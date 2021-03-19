@@ -6,6 +6,7 @@ import co.com.sofkau.domain.game.events.RoundCreated;
 import co.com.sofkau.domain.game.values.GameId;
 import co.com.sofkau.domain.game.values.Person;
 import co.com.sofkau.domain.game.values.RoundId;
+import co.com.sofkau.domain.round.events.FirstStageStarted;
 import co.com.sofkau.domain.round.events.RolledDice;
 import co.com.sofkau.domain.round.events.RoundStarted;
 import co.com.sofkau.domain.round.values.DiceId;
@@ -18,8 +19,9 @@ import java.util.stream.Collectors;
 public class Round extends AggregateEvent<RoundId> {
 
     protected GameId gameId;
+    protected RoundId roundId;
     protected Set<Person> players;
-    protected Set<StageId> stages;
+    protected StageId stageId;
     protected Map<DiceId, Dice> dices;
     protected Pot pot;
 
@@ -40,7 +42,11 @@ public class Round extends AggregateEvent<RoundId> {
     }
 
     public void startRound (GameId gameId, RoundId roundId, Set<Person> players){
-        appendChange(new RoundStarted(gameId, roundId, players));
+        appendChange(new RoundStarted(gameId, roundId, stageId, players));
+    }
+
+    public void startFirstStage(StageId stageId, Set<Person> players){
+        appendChange(new FirstStageStarted(gameId, stageId, players));
     }
 
     public void rollDices() {
