@@ -7,12 +7,12 @@ import co.com.sofkau.domain.round.values.StageId;
 
 import java.util.Set;
 
-public class FirstStageStarted extends DomainEvent {
+public class StageStarted extends DomainEvent {
     private final GameId gameId;
     private final StageId stageId;
     private final Set<Person> players;
 
-    public FirstStageStarted(GameId gameId, StageId stageId, Set<Person> players) {
+    public StageStarted(GameId gameId, StageId stageId, Set<Person> players) {
         super("ddd-game.round.firststarted");
         this.gameId = gameId;
         this.stageId = stageId;

@@ -6,13 +6,14 @@ import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofka.business.support.TriggeredEvent;
 import co.com.sofkau.domain.game.values.RoundId;
 import co.com.sofkau.domain.round.Round;
-import co.com.sofkau.domain.round.events.RoundStarted;
+import co.com.sofkau.domain.round.events.RolledDice;
 
-public class StartFirstStageUseCase extends UseCase<TriggeredEvent<RoundStarted>, ResponseEvents> {
+public class StartStageUseCase extends UseCase<TriggeredEvent<RolledDice>, ResponseEvents> {
+
 
     @Override
-    public void executeUseCase(TriggeredEvent<RoundStarted> roundStartedTriggeredEvent) {
-        var event = roundStartedTriggeredEvent.getDomainEvent();
+    public void executeUseCase(TriggeredEvent<RolledDice> rolledDiceTriggeredEvent) {
+        var event = rolledDiceTriggeredEvent.getDomainEvent();
         var roundId = RoundId.of(event.aggregateRootId());
 
         var round = Round.from(RoundId.of(roundId.value()), retrieveEvents());

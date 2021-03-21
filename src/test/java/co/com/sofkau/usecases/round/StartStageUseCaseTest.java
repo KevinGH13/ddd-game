@@ -8,8 +8,11 @@ import co.com.sofkau.domain.game.events.RoundCreated;
 import co.com.sofkau.domain.game.values.GameId;
 import co.com.sofkau.domain.game.values.Person;
 import co.com.sofkau.domain.game.values.RoundId;
-import co.com.sofkau.domain.round.events.FirstStageStarted;
+import co.com.sofkau.domain.round.events.RolledDice;
+import co.com.sofkau.domain.round.events.StageStarted;
 import co.com.sofkau.domain.round.events.RoundStarted;
+import co.com.sofkau.domain.round.values.DiceFace;
+import co.com.sofkau.domain.round.values.DiceId;
 import co.com.sofkau.domain.round.values.StageId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,13 +21,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
-class StartFirstStageUseCaseTest {
+class StartStageUseCaseTest {
 
     private final Set<Person> players = Set.of(
             Person.of("1018"), Person.of("636"),
@@ -37,6 +41,19 @@ class StartFirstStageUseCaseTest {
 
     private final StageId stageId = StageId.of(1);
 
+    private final List<Map<DiceId, List<DiceFace>>> valuesDice = List.of(
+            Map.of(
+                    DiceId.of(1),
+                    List.of(
+                            new DiceFace(1),
+                            new DiceFace(3),
+                            new DiceFace(3),
+                            new DiceFace(2),
+                            new DiceFace(5),
+                            new DiceFace(1))
+                    ));
+
+
     @Mock
     private DomainEventRepository repository;
 
@@ -45,18 +62,18 @@ class StartFirstStageUseCaseTest {
 
         var event = createTriggeredEventWith(roundId);
 
-        var useCase = new StartFirstStageUseCase();
+        var useCase = new StartStageUseCase();
 
         when(repository.getEventsBy(roundId.value())).thenReturn(eventStored(roundId));
         useCase.addRepository(repository);
 
         var events = executor(roundId, event, useCase);
-        var firstStageStarted = (FirstStageStarted) events.get(0);
+        var firstStageStarted = (StageStarted) events.get(0);
 
         Assertions.assertEquals("1", firstStageStarted.getStageId().toString());
     }
 
-    private List<DomainEvent> executor (RoundId roundId, RoundStarted event, StartFirstStageUseCase useCase){
+    private List<DomainEvent> executor (RoundId roundId, RolledDice event, StartStageUseCase useCase){
         return UseCaseHandler
                 .getInstance()
                 .setIdentifyExecutor(roundId.toString())
@@ -65,8 +82,8 @@ class StartFirstStageUseCaseTest {
                 .getDomainEvents();
     }
 
-    private RoundStarted createTriggeredEventWith(RoundId roundId) {
-        var event = new RoundStarted(gameId, roundId, stageId, players);
+    private RolledDice createTriggeredEventWith(RoundId roundId) {
+        var event = new RolledDice(gameId, roundId, stageId, players, valuesDice);
         event.setAggregateRootId(roundId.value());
         return event;
     }

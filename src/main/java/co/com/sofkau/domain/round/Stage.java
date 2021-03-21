@@ -14,14 +14,13 @@ public class Stage extends Entity<StageId> {
 
     private final Set<Person> players;
     private final Map<Person, CompoundBet> bettingRound;
-    private final List<Dice> dice;
+    private final List<Dice> dices;
 
-    public Stage(StageId entityId, Set<Person> players, List<Dice> dice) {
+    public Stage(StageId entityId, Set<Person> players, List<Dice> dices) {
         super(entityId);
         this.players = players;
         this.bettingRound = new HashMap<>();
-        this.dice = dice;
+        this.dices = dices;
     }
-
 
 }

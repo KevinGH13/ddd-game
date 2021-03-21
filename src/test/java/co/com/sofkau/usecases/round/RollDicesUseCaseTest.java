@@ -49,8 +49,8 @@ class RollDicesUseCaseTest {
         var events = executor(roundId, event, useCase);
         var rolledDice = (RolledDice) events.get(0);
 
-        Assertions.assertEquals(gameId, rolledDice.gameId());
-        Assertions.assertEquals(6, rolledDice.diceValues().size());
+        Assertions.assertEquals(gameId, rolledDice.getGameId());
+        Assertions.assertEquals(6, rolledDice.getDiceValues().size());
 
 
     }

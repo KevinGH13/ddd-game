@@ -9,7 +9,6 @@ import co.com.sofkau.domain.round.values.Pot;
 import co.com.sofkau.domain.round.values.StageId;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class RoundChange extends EventChange {
     public RoundChange(Round round) {
@@ -19,6 +18,7 @@ public class RoundChange extends EventChange {
             round.players = event.getPlayers();
             round.pot = new Pot(0F);
             round.dices = new HashMap<>();
+            round.countStage = 0;
         });
 
         apply((RoundStarted event) -> {
@@ -29,6 +29,9 @@ public class RoundChange extends EventChange {
             }
         });
 
-        apply((RolledDice event) -> round.dices.values().forEach(Dice::rollDice));
+        apply((RolledDice event) -> {
+            round.dices.values().forEach(Dice::rollDice);
+            round.countStage = 1;
+        });
     }
 }
