@@ -47,7 +47,13 @@ public class Game extends AggregateEvent<GameId> {
     }
 
     public void decreaseCashPlayer(Person player, Cash cashDecrease) {
+        //TODO implement logic decrease cash
         appendChange(new CashPlayerDecreased(player, cashDecrease));
+    }
+
+    public void increaseCashPlayer(Person player, Cash cashIncrease) {
+        //TODO implement logic increase cash
+        appendChange(new CashPlayerIncreased(player, cashIncrease));
     }
 
     public Map<Person, Player> players(){

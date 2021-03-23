@@ -33,5 +33,6 @@ public class RoundChange extends EventChange {
             round.dices.values().forEach(Dice::rollDice);
             round.countStage = 1;
         });
+
     }
 }

@@ -6,12 +6,11 @@ import co.com.sofkau.domain.game.events.RoundCreated;
 import co.com.sofkau.domain.game.values.GameId;
 import co.com.sofkau.domain.game.values.Person;
 import co.com.sofkau.domain.game.values.RoundId;
+import co.com.sofkau.domain.round.events.RoundWinnerAssigned;
 import co.com.sofkau.domain.round.events.StageStarted;
 import co.com.sofkau.domain.round.events.RolledDice;
 import co.com.sofkau.domain.round.events.RoundStarted;
-import co.com.sofkau.domain.round.values.DiceId;
-import co.com.sofkau.domain.round.values.Pot;
-import co.com.sofkau.domain.round.values.StageId;
+import co.com.sofkau.domain.round.values.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -57,6 +56,22 @@ public class Round extends AggregateEvent<RoundId> {
                 .map(dice -> Map.of(dice.identity(), dice.values()))
                 .collect(Collectors.toList());
         appendChange(new RolledDice(gameId, roundId, stageId, players, valuesDice)).apply();
+    }
+
+    public void assignWinner(List<Person> players) {
+
+        if (players.size() > 1 && countStage < 3) {
+            appendChange(new StageStarted(gameId, stageId, new HashSet<>(players))).apply();
+        }
+        appendChange(new RoundWinnerAssigned(players.get(0))).apply();
+    }
+
+    public Set<Person> players() {
+        return players;
+    }
+
+    public Map<DiceId, Dice> dices() {
+        return dices;
     }
 
 

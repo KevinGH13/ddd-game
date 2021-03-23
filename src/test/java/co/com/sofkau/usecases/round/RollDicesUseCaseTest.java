@@ -31,6 +31,8 @@ class RollDicesUseCaseTest {
     );
     private final GameId gameId = GameId.of("0001");
 
+    private final RoundId roundId = RoundId.of("01");
+
     private final StageId stageId = StageId.of(1);
 
 
@@ -39,11 +41,10 @@ class RollDicesUseCaseTest {
 
     @Test
     void RollDices(){
-        var roundId = RoundId.of("01");
-        var event = createTriggeredEventWith(roundId);
+        var event = createTriggeredEventWith();
 
         var useCase = new RollDicesUseCase();
-        when(repository.getEventsBy(roundId.value())).thenReturn(eventStored(roundId));
+        when(repository.getEventsBy(roundId.value())).thenReturn(eventStored());
         useCase.addRepository(repository);
 
         var events = executor(roundId, event, useCase);
@@ -52,10 +53,9 @@ class RollDicesUseCaseTest {
         Assertions.assertEquals(gameId, rolledDice.getGameId());
         Assertions.assertEquals(6, rolledDice.getDiceValues().size());
 
-
     }
 
-    private RoundStarted createTriggeredEventWith(RoundId roundId){
+    private RoundStarted createTriggeredEventWith(){
         var event = new RoundStarted(gameId, roundId, stageId, players);
         event.setAggregateRootId(roundId.value());
         return event;
@@ -70,7 +70,7 @@ class RollDicesUseCaseTest {
                 .getDomainEvents();
     }
 
-    private List<DomainEvent> eventStored(RoundId roundId) {
+    private List<DomainEvent> eventStored() {
         return List.of(
                 new RoundCreated(gameId, roundId, players),
                 new RoundStarted(gameId, roundId, stageId, players)

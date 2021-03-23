@@ -60,11 +60,11 @@ class StartStageUseCaseTest {
     @Test
     void StartFirstStage(){
 
-        var event = createTriggeredEventWith(roundId);
+        var event = createTriggeredEventWith();
 
         var useCase = new StartStageUseCase();
 
-        when(repository.getEventsBy(roundId.value())).thenReturn(eventStored(roundId));
+        when(repository.getEventsBy(roundId.value())).thenReturn(eventStored());
         useCase.addRepository(repository);
 
         var events = executor(roundId, event, useCase);
@@ -82,13 +82,13 @@ class StartStageUseCaseTest {
                 .getDomainEvents();
     }
 
-    private RolledDice createTriggeredEventWith(RoundId roundId) {
+    private RolledDice createTriggeredEventWith() {
         var event = new RolledDice(gameId, roundId, stageId, players, valuesDice);
         event.setAggregateRootId(roundId.value());
         return event;
     }
 
-    private List<DomainEvent> eventStored(RoundId roundId) {
+    private List<DomainEvent> eventStored() {
         return List.of(
                 new RoundCreated(gameId, roundId, players),
                 new RoundStarted(gameId, roundId, stageId, players)
